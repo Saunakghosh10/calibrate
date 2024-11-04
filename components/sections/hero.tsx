@@ -118,7 +118,7 @@ export function Hero() {
   return (
     <section className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-background">
       <div className="absolute inset-0 w-full h-full">
-        <Meteors number={20} />
+        <Meteors number={40} />
       </div>
       
       <div className="container relative px-4 sm:px-6 lg:px-8">
@@ -170,7 +170,12 @@ export function Hero() {
               >
                 The{" "}
                 <FlipWords 
-                  words={["Modern", "Simple", "Stable", "Secure"]}
+                  words={[
+                    "Modern",
+                    "Minimal",
+                    "Magnificent",
+                    "Meaningful"
+                  ]}
                   className="min-w-[6ch] text-primary"
                   duration={2500}
                 />{" "}

@@ -77,6 +77,7 @@ const config: Config = {
   			'fade-in': 'fade-in 0.8s ease-out forwards 2.5s',
   			meteor: 'meteor 5s linear infinite',
   			'meteor-effect': 'meteor 5s linear infinite',
+  			'meteor-effect-reverse': 'meteor-reverse 5s linear infinite',
   		},
   		keyframes: {
   			aurora: {
@@ -179,6 +180,19 @@ const config: Config = {
   				},
   				'100%': {
   					transform: 'rotate(215deg) translateX(-500px)',
+  					opacity: '0'
+  				}
+  			},
+  			'meteor-reverse': {
+  				'0%': {
+  					transform: 'rotate(145deg) translateX(0)',
+  					opacity: '1'
+  				},
+  				'70%': {
+  					opacity: '1'
+  				},
+  				'100%': {
+  					transform: 'rotate(145deg) translateX(500px)',
   					opacity: '0'
   				}
   			}
