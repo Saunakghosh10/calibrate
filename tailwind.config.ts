@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-const config: Config = {
+const config = {
     darkMode: ["class"],
     content: [
     "./pages/**/*.{ts,tsx}",
@@ -8,9 +9,10 @@ const config: Config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
+  prefix: "",
   theme: {
   	container: {
-  		center: 'true',
+  		center: true,
   		padding: '2rem',
   		screens: {
   			'2xl': '1400px'
@@ -78,6 +80,8 @@ const config: Config = {
   			meteor: 'meteor 5s linear infinite',
   			'meteor-effect': 'meteor 5s linear infinite',
   			'meteor-effect-reverse': 'meteor-reverse 5s linear infinite',
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out',
   		},
   		keyframes: {
   			aurora: {
@@ -195,13 +199,26 @@ const config: Config = {
   					transform: 'rotate(145deg) translateX(500px)',
   					opacity: '0'
   				}
-  			}
+  			},
+  			'accordion-down': {
+  				from: { height: "0" },
+  				to: { height: "var(--radix-accordion-content-height)" },
+  			},
+  			'accordion-up': {
+  				from: { height: "var(--radix-accordion-content-height)" },
+  				to: { height: "0" },
+  			},
   		},
   		backgroundImage: {
   			'noise': "url('/noise.png')",
-  		}
+  		},
+  		fontFamily: {
+  			sans: ["var(--font-sans)", ...fontFamily.sans],
+  			inter: ["var(--font-inter)", ...fontFamily.sans],
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
-};
+} satisfies Config
+
 export default config;

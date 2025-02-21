@@ -16,8 +16,21 @@ import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import RetroGrid from "@/components/magicui/retro-grid";
 import Meteors from "@/components/magicui/meteors";
+import { useRouter } from 'next/navigation'
+import { SignInButton, useAuth } from "@clerk/nextjs"
 
 export function Hero() {
+  const router = useRouter()
+  const { isSignedIn } = useAuth()
+
+  const handleGetStarted = () => {
+    if (isSignedIn) {
+      router.push('/dashboard')
+    } else {
+      router.push('/sign-up')
+    }
+  }
+
   const containerRef = useRef(null)
   const textRef = useRef(null)
 
@@ -150,7 +163,7 @@ export function Hero() {
           <motion.div className="space-y-8 text-center w-full max-w-4xl mx-auto px-4">
             <motion.h1 
               ref={textRef}
-              className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.15] sm:leading-[1.2]"
+              className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-[-0.02em] leading-[1.15] sm:leading-[1.2] mb-8"
             >
               {/* Updated sparkles container with higher z-index and opacity */}
               <div className="absolute inset-0 z-0">
@@ -189,7 +202,7 @@ export function Hero() {
               </motion.span>
               <br />
               <motion.span
-                className="inline-block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent mt-2 sm:mt-4"
+                className="inline-block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent mt-4 sm:mt-6 pb-2"
                 whileHover={{
                   scale: 1.02,
                   transition: { duration: 0.2 }
@@ -202,7 +215,7 @@ export function Hero() {
             {/* Updated description with better spacing */}
             <motion.p
               variants={itemVariants}
-              className="mx-auto max-w-[90%] sm:max-w-[80%] text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed"
+              className="mx-auto max-w-[90%] sm:max-w-[80%] text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed tracking-[-0.01em] mt-6"
             >
               The most powerful calendar platform for individuals and teams.
               <br className="hidden sm:block" />
@@ -216,7 +229,10 @@ export function Hero() {
             className="mt-10 sm:mt-12 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 w-full px-4 sm:px-0"
           >
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <ShimmerButton className="w-full sm:w-auto text-base font-medium">
+              <ShimmerButton 
+                onClick={handleGetStarted}
+                className="w-full sm:w-auto text-base font-medium"
+              >
                 <motion.span className="relative z-10 flex items-center gap-2">
                   Get Started
                   <motion.span
@@ -269,7 +285,7 @@ export function Hero() {
                   backgroundColor: "var(--primary)",
                   color: "var(--background)",
                 }}
-                className="flex items-center gap-2 rounded-full bg-muted px-4 py-2.5 text-sm font-medium text-muted-foreground cursor-pointer transition-colors duration-200"
+                className="flex items-center gap-2 rounded-full bg-muted px-4 py-2.5 text-sm font-medium tracking-[-0.01em] text-muted-foreground cursor-pointer transition-colors duration-200"
               >
                 <CheckCircle className="h-4 w-4 text-primary" />
                 {feature}

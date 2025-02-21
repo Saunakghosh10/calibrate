@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+@import "../styles/datepicker.css";
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -29,8 +31,15 @@
     --shimmer-speed: 2s;
     --grid-angle: 60deg;
     --meteor-speed: 5s;
+    --font-inter: "Inter", system-ui, sans-serif;
   }
  
+  html {
+    font-family: var(--font-inter);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -52,6 +61,16 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }
+
+  /* Enhance heading styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-inter tracking-tight;
+  }
+
+  /* Enhance body text */
+  p, span, a, li {
+    @apply font-inter tracking-normal;
+  }
 }
 
 /* Add this to handle Framer Motion layout animations */
@@ -69,5 +88,33 @@
   .animate-meteor {
     animation: meteor var(--meteor-speed) linear infinite;
   }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Calendar styles */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: hsl(var(--primary));
+  --rdp-background-color: hsl(var(--primary));
+  --rdp-accent-color-dark: hsl(var(--primary));
+  --rdp-background-color-dark: hsl(var(--primary));
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 2px solid var(--rdp-accent-color);
+  margin: 0;
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
 }
 

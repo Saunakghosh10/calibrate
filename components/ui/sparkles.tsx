@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import type { Container, Engine } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
+import { ISourceOptions } from "@tsparticles/engine";
 
 type SparklesCoreProps = {
   id?: string;
@@ -37,52 +38,47 @@ export const SparklesCore = ({
     console.log(container);
   };
 
+  const options: ISourceOptions = {
+    fpsLimit: 60,
+    particles: {
+      number: {
+        value: particleDensity,
+      },
+      color: {
+        value: particleColor,
+      },
+      opacity: {
+        value: 0.3,
+      },
+      size: {
+        value: {
+          min: minSize,
+          max: maxSize,
+        },
+      },
+      move: {
+        enable: true,
+        direction: "none",
+        random: true,
+        speed: 1,
+        straight: false,
+      },
+    },
+    background: {
+      color: {
+        value: background,
+      },
+    },
+    detectRetina: true,
+  };
+
   if (init) {
     return (
       <Particles
         id={id}
         className={className}
         particlesLoaded={particlesLoaded}
-        options={{
-          background: {
-            color: {
-              value: background,
-            },
-          },
-          fpsLimit: 60,
-          particles: {
-            color: {
-              value: particleColor,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: particleDensity,
-              },
-              value: 80,
-            },
-            opacity: {
-              value: { min: 0.1, max: 0.5 },
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: minSize, max: maxSize },
-            },
-            move: {
-              enable: true,
-              direction: "none",
-              outModes: {
-                default: "bounce",
-              },
-              random: true,
-              speed: 1,
-              straight: false,
-            },
-          },
-          detectRetina: true,
-        }}
+        options={options}
       />
     );
   }
